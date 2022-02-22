@@ -1,0 +1,53 @@
+{
+  "name": "hashcode-2022-cryptobros",
+  "version": "0.0.1",
+  "description": "Google HashCode Competition 2022 - Cryptobros team",
+  "author": "Cryptobros",
+  "repository": "https://github.com/jcolladosp/hash-code-2022",
+  "license": "MIT",
+  "keywords": [
+    "typescript",
+    "hashcode",
+    "2022"
+  ],
+  "main": "./dist/tsc/main.js",
+  "types": "./dist/tsc/main.d.ts",
+  "browser": "./dist/esbuild/browser.js",
+  "bin": {
+    "my-cli-tool": "./dist/esbuild/cli.js"
+  },
+  "scripts": {
+    "start": "ts-node src/main",
+    "practice": "ts-node practice_round/src/main.ts",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "clean": "rm -rf dist build package",
+    "ts-node": "ts-node --transpile-only",
+    "build": "tsc -p tsconfig.json",
+    "build-all": "yarn clean && yarn build && yarn esbuild-node && yarn esbuild-browser",
+    "esbuild-browser": "esbuild src/browser.ts --bundle --minify --sourcemap=external --outfile=dist/esbuild/browser.js",
+    "esbuild-browser:dev": "esbuild src/browser.ts --bundle --outfile=dist/esbuild/browser.js",
+    "esbuild-browser:watch": "esbuild src/browser.ts --bundle --watch --outfile=dist/esbuild/browser.js",
+    "esbuild-node": "esbuild src/cli.ts --bundle --platform=node --minify --sourcemap=external --outfile=dist/esbuild/cli.js",
+    "esbuild-node:dev": "esbuild src/cli.ts --bundle --sourcemap=external --outfile=dist/esbuild/cli.js",
+    "esbuild-node:watch": "esbuild src/cli.ts --bundle --watch --sourcemap=external --outfile=dist/esbuild/cli.js"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "^17.0.19",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "esbuild": "^0.14.23",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "2.5.1",
+    "ts-node": "^10.5.0",
+    "typedoc": "^0.22.12",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  }
+}

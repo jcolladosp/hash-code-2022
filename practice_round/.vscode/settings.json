@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true,
+    "**/documentation": true
+  },
+  "editor.minimap.maxColumn": 250,
+  "html.format.wrapLineLength": 175,
+  "html.format.wrapAttributes": "aligned-multiple"
+}
