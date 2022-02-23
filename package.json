@@ -1,5 +1,6 @@
 {
   "name": "hashcode-2022-cryptobros",
+  "type": "module",
   "version": "0.0.1",
   "description": "Google HashCode Competition 2022 - Cryptobros team",
   "author": "Cryptobros",
@@ -18,7 +19,7 @@
   },
   "scripts": {
     "start": "ts-node src/main",
-    "practice": "ts-node practice_round/src/main.ts",
+    "practice": "TS_NODE_TRANSPILE_ONLY=true node --loader ts-node/esm practice_round/src/main.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf dist build package",
     "ts-node": "ts-node --transpile-only",
@@ -44,7 +45,7 @@
     "prettier": "2.5.1",
     "ts-node": "^10.5.0",
     "typedoc": "^0.22.12",
-    "typescript": "^4.5.5"
+    "typescript": "^4.7.0-dev.20220223"
   },
   "dependencies": {
     "lodash": "^4.17.21",

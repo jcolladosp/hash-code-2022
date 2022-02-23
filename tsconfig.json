@@ -6,7 +6,7 @@
     },
     "typeRoots": ["./src/@types"],
     "target": "es6",
-    "module": "commonjs",
+    "module": "ESNext",
     "moduleResolution": "node",
     "declaration": true,
     "allowJs": true,

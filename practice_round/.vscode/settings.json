@@ -8,5 +8,6 @@
   },
   "editor.minimap.maxColumn": 250,
   "html.format.wrapLineLength": 175,
-  "html.format.wrapAttributes": "aligned-multiple"
+  "html.format.wrapAttributes": "aligned-multiple",
+  "typescript.tsdk": "./node_modules/typescript/lib"
 }
