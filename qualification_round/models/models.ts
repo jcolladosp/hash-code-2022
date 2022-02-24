@@ -36,6 +36,7 @@ export interface ExecutedProject {
 }
 
 export interface Submission {
+  name: string;
   projectsExecuted: number;
   projects: ExecutedProject[];
 }

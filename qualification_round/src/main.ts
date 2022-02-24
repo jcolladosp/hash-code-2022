@@ -1,6 +1,7 @@
 import path from 'path';
 import { Dataset, Submission } from '../models/models';
 import { readDataset } from './utils/dataset-reader.js';
+import { writeSubmission } from './utils/subsmission_writer.js';
 
 export const datasetsPath = './qualification_round/datasets/';
 export const outputFilesPath = './qualification_round/output/';
@@ -18,15 +19,35 @@ const datasetArg = process.argv[2];
 
 const timelineDays = 99999999;
 
-const submission: Submission = { projectsExecuted: 0, projects: [] };
+const testSubmission: Submission = {
+  name: 'test',
+  projectsExecuted: 3,
+  projects: [
+    {
+      name: 'WebServer',
+      contributors: ['Bob', 'Anna'],
+    },
+    {
+      name: 'Logging',
+      contributors: ['Anna'],
+    },
+    {
+      name: 'WebChat',
+      contributors: ['Maria', 'Bob'],
+    },
+  ],
+};
+
+//
 
 readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`)).then(
   (dataset: Dataset) => {
-    for (let i = 0; i < timelineDays; i++) {
-      dataset.projects.forEach((project) => {});
-    }
+    // for (let i = 0; i < timelineDays; i++) {
+    //   dataset.projects.forEach((project) => {});
+    // }
 
     // Escribimos output en fichero
+    writeSubmission(path.resolve(process.cwd(), outputFilesPath), testSubmission);
     // writeSubmission(path.resolve(process.cwd(), outputFilesPath), submission);
   },
 );
