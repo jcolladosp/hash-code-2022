@@ -1,5 +1,5 @@
 import path from 'path';
-import { Dataset } from '../models/models';
+import { Dataset, Submission } from '../models/models';
 import { readDataset } from './utils/dataset-reader.js';
 
 export const datasetsPath = './qualification_round/datasets/';
@@ -17,6 +17,8 @@ const datasets = {
 const datasetArg = process.argv[2];
 
 const timelineDays = 99999999;
+
+const submission: Submission = { projectsExecuted: 0, projects: [] };
 
 readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`)).then(
   (dataset: Dataset) => {
