@@ -1,18 +1,28 @@
-﻿export interface Ingredient {
+﻿export interface Skill {
   name: string;
+  level: number;
 }
 
-export interface Client {
-  likedIngredients: Ingredient[];
-  dislikedIngredients: Ingredient[];
+export interface Contributor {
+  name: string;
+  skills: Skill[];
+  bussy: boolean;
+  assignedProjects: number;
 }
 
-export interface Pizza {
-  ingredients: Ingredient[];
+export interface Project {
+  name: string;
+  days: number;
+  score: number;
+  bestBefore: number;
+  numberOfSkills: number;
+  requiredSkills: Skill[];
 }
 
 export interface Dataset {
   name: string;
-  totalClients: number;
-  clients: Client[];
+  totalContributors: number;
+  totalProjects: number;
+  contributors: Contributor[];
+  projects: Project[];
 }
