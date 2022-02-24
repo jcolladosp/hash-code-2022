@@ -17,7 +17,7 @@ const datasets = {
 
 const datasetArg = process.argv[2];
 
-const timelineDays = 99;
+const timelineDays = 1000;
 
 const testSubmission: any = {
   name: 'test',
@@ -46,6 +46,7 @@ readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`
     for (let i = 0; i < timelineDays; i++) {
       dataset.projects.forEach((project) => {
         let possibleExecutedProject: ExecutedProject = { contributors: [], name: '' };
+        possibleExecutedProject.contributors = [];
         project.requiredSkills.map((requiredSkill) => {
           requiredSkill.fullfiled = false;
         });
