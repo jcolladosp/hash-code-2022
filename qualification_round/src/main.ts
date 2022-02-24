@@ -9,10 +9,11 @@ export const outputFilesPath = './qualification_round/output/';
 
 const datasets = {
   a: 'a_an_example.in.txt',
-  b: 'b_basic.in.txt',
-  c: 'c_coarse.in.txt',
-  d: 'd_difficult.in.txt',
-  e: 'e_elaborate.in.txt',
+  b: 'b_better_start_small.in.txt',
+  c: 'c_collaboration.in.txt',
+  d: 'd_dense_schedule.in.txt',
+  e: 'e_exceptional_skills.in.txt',
+  f: 'f_find_great_mentors.in.txt',
 };
 
 const datasetArg = process.argv[2];
