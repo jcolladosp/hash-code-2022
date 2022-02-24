@@ -6,9 +6,18 @@
   "configurations": [
     {
       "type": "node-terminal",
+      "name": "qualification",
+      "request": "launch",
+      // npm run [practice | qualification] {dataset}
+      "command": "npm run qualification b",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
       "name": "practice",
       "request": "launch",
-      "command": "npm run practice",
+      // npm run [practice | qualification] {dataset}
+      "command": "npm run practice a",
       "cwd": "${workspaceFolder}"
     }
   ]

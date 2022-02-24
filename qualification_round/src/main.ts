@@ -4,8 +4,8 @@ import { writeSubmission } from './utils/subsmission_writer.js';
 import { Submission } from './utils/subsmission_writer';
 import { Dataset, Ingredient } from '../models/models';
 
-export const datasetsPath = './practice_round/datasets/';
-export const outputFilesPath = './practice_round/output/';
+export const datasetsPath = './qualification_round/datasets/';
+export const outputFilesPath = './qualification_round/output/';
 
 const datasets = {
   a: 'a_an_example.in.txt',

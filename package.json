@@ -18,7 +18,7 @@
     "my-cli-tool": "./dist/esbuild/cli.js"
   },
   "scripts": {
-    "start": "ts-node src/main",
+    "qualification": "TS_NODE_TRANSPILE_ONLY=true node --loader ts-node/esm qualification_round/src/main.ts",
     "practice": "TS_NODE_TRANSPILE_ONLY=true node --loader ts-node/esm practice_round/src/main.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf dist build package",
