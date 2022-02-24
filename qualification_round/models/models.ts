@@ -7,7 +7,7 @@ export interface Contributor {
   name: string;
   skills: Skill[];
   bussy: boolean;
-  assignedProjects: number;
+  assignedProjects: Project[];
 }
 
 export interface Project {

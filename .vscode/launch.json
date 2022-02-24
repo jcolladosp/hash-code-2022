@@ -9,7 +9,7 @@
       "name": "qualification",
       "request": "launch",
       // npm run [practice | qualification] {dataset}
-      "command": "npm run qualification b",
+      "command": "npm run qualification a",
       "cwd": "${workspaceFolder}"
     },
     {
