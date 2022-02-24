@@ -1,7 +1,7 @@
 import path from 'path';
-import { readDataset } from '../utils/dataset-reader.js';
-import { writeSubmission } from '../utils/subsmission_writer.js';
-import { Submission } from '../utils/subsmission_writer';
+import { readDataset } from './utils/dataset-reader.js';
+import { writeSubmission } from './utils/subsmission_writer.js';
+import { Submission } from './utils/subsmission_writer';
 import { Dataset, Ingredient } from '../models/models';
 
 export const datasetsPath = './practice_round/datasets/';

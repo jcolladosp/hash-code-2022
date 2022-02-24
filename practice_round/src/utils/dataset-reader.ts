@@ -1,5 +1,5 @@
 ﻿import * as readline from 'readline';
-import { Dataset, Ingredient } from '../models/models';
+import { Dataset, Ingredient } from '../../models/models';
 import * as fs from 'fs';
 import { once } from 'events';
 

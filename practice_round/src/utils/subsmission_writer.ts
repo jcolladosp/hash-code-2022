@@ -1,4 +1,4 @@
-﻿import { Ingredient } from '../models/models';
+﻿import { Ingredient } from '../../models/models';
 import * as fs from 'fs';
 
 export type Submission = {
