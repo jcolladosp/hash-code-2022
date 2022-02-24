@@ -17,7 +17,7 @@ const datasets = {
 
 const datasetArg = process.argv[2];
 
-const timelineDays = 999;
+const timelineDays = 99;
 
 const testSubmission: any = {
   name: 'test',
@@ -45,7 +45,7 @@ readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`
   (dataset: Dataset) => {
     for (let i = 0; i < timelineDays; i++) {
       dataset.projects.forEach((project) => {
-        let possibleExecutedProject: ExecutedProject = {};
+        let possibleExecutedProject: ExecutedProject = { contributors: [], name: '' };
         project.requiredSkills.map((requiredSkill) => {
           requiredSkill.fullfiled = false;
         });
@@ -54,11 +54,11 @@ readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`
           dataset.contributors.forEach((contributor) => {
             if (
               contributor.skills.find((s) => {
-                s.name === skill.name && s.level >= skill.level && !contributor.bussy;
+                return s.name === skill.name && s.level >= skill.level && !contributor.bussy;
               })
             ) {
+              possibleExecutedProject.name = project.name;
               possibleExecutedProject.contributors.push(contributor);
-
               if (project.numberOfSkills === possibleExecutedProject.contributors.length) {
                 submission.projects.push(possibleExecutedProject);
                 possibleExecutedProject.contributors.forEach((c) => {
@@ -72,9 +72,11 @@ readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`
         });
       });
     }
-
+    submission.name = datasetArg;
+    submission.projectsExecuted = submission.projects.length;
+    console.log(submission);
     // Escribimos output en fichero
-    writeSubmission(path.resolve(process.cwd(), outputFilesPath), testSubmission);
+    writeSubmission(path.resolve(process.cwd(), outputFilesPath), submission);
     // writeSubmission(path.resolve(process.cwd(), outputFilesPath), submission);
   },
 );
