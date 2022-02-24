@@ -12,7 +12,7 @@ export async function writeSubmission(filePath: string, submission: Submission) 
 
   submission.projects.forEach((project) => {
     lines.push(project.name);
-    lines.push(project.contributors.join(' '));
+    lines.push(project.contributors.map((contributor) => contributor.name).join(' '));
   });
 
   fs.writeFileSync(`${filePath}/${fileName}`, lines.join('\n'));

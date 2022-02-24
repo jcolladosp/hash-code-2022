@@ -1,6 +1,7 @@
 ﻿export interface Skill {
   name: string;
   level: number;
+  fullfiled?: boolean;
 }
 
 export interface Contributor {
@@ -31,8 +32,8 @@ export interface Dataset {
   projects: Project[];
 }
 export interface ExecutedProject {
-  name: string;
-  contributors: string[];
+  name?: string;
+  contributors?: Contributor[];
 }
 
 export interface Submission {

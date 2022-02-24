@@ -1,5 +1,5 @@
 import path from 'path';
-import { Dataset, Submission } from '../models/models';
+import { Dataset, Submission, Contributor, ExecutedProject } from '../models/models';
 import { readDataset } from './utils/dataset-reader.js';
 import { writeSubmission } from './utils/subsmission_writer.js';
 
@@ -17,34 +17,61 @@ const datasets = {
 
 const datasetArg = process.argv[2];
 
-const timelineDays = 99999999;
+const timelineDays = 999;
 
-const testSubmission: Submission = {
+const testSubmission: any = {
   name: 'test',
   projectsExecuted: 3,
   projects: [
     {
       name: 'WebServer',
-      contributors: ['Bob', 'Anna'],
+      contributors: [{ name: 'Bob' }, { name: 'Anna' }],
     },
     {
       name: 'Logging',
-      contributors: ['Anna'],
+      contributors: [{ name: 'Anna' }],
     },
     {
       name: 'WebChat',
-      contributors: ['Maria', 'Bob'],
+      contributors: [{ name: 'Maria' }, { name: 'Bob' }],
     },
   ],
 };
 
 //
+const submission: Submission = { projectsExecuted: 0, projects: [], name: '' };
 
 readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`)).then(
   (dataset: Dataset) => {
-    // for (let i = 0; i < timelineDays; i++) {
-    //   dataset.projects.forEach((project) => {});
-    // }
+    for (let i = 0; i < timelineDays; i++) {
+      dataset.projects.forEach((project) => {
+        let possibleExecutedProject: ExecutedProject = {};
+        project.requiredSkills.map((requiredSkill) => {
+          requiredSkill.fullfiled = false;
+        });
+
+        project.requiredSkills.forEach((skill) => {
+          dataset.contributors.forEach((contributor) => {
+            if (
+              contributor.skills.find((s) => {
+                s.name === skill.name && s.level >= skill.level && !contributor.bussy;
+              })
+            ) {
+              possibleExecutedProject.contributors.push(contributor);
+
+              if (project.numberOfSkills === possibleExecutedProject.contributors.length) {
+                submission.projects.push(possibleExecutedProject);
+                possibleExecutedProject.contributors.forEach((c) => {
+                  if (dataset.contributors.find((contributor) => contributor.name === c.name)) {
+                    c.bussy = true;
+                  }
+                });
+              }
+            }
+          });
+        });
+      });
+    }
 
     // Escribimos output en fichero
     writeSubmission(path.resolve(process.cwd(), outputFilesPath), testSubmission);
