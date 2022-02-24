@@ -1,5 +1,5 @@
 import path from 'path';
-import { Dataset, Submission } from '../models/models';
+import { Dataset, Submission, Contributor, ExecutedProject } from '../models/models';
 import { readDataset } from './utils/dataset-reader.js';
 
 export const datasetsPath = './qualification_round/datasets/';
@@ -23,7 +23,33 @@ const submission: Submission = { projectsExecuted: 0, projects: [] };
 readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`)).then(
   (dataset: Dataset) => {
     for (let i = 0; i < timelineDays; i++) {
-      dataset.projects.forEach((project) => {});
+      dataset.projects.forEach((project) => {
+        let possibleExecutedProject: ExecutedProject = {};
+        project.requiredSkills.map((requiredSkill) => {
+          requiredSkill.fullfiled = false;
+        });
+
+        project.requiredSkills.forEach((skill) => {
+          dataset.contributors.forEach((contributor) => {
+            if (
+              contributor.skills.find((s) => {
+                s.name === skill.name && s.level >= skill.level && !contributor.bussy;
+              })
+            ) {
+              possibleExecutedProject.contributors.push(contributor);
+
+              if (project.numberOfSkills === possibleExecutedProject.contributors.length) {
+                submission.projects.push(possibleExecutedProject);
+                possibleExecutedProject.contributors.forEach((c) => {
+                  if (dataset.contributors.find((contributor) => contributor.name === c.name)) {
+                    c.bussy = true;
+                  }
+                });
+              }
+            }
+          });
+        });
+      });
     }
 
     // Escribimos output en fichero
