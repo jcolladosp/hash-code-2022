@@ -55,18 +55,25 @@ readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`
           dataset.contributors.forEach((contributor) => {
             if (
               contributor.skills.find((s) => {
-                return s.name === skill.name && s.level >= skill.level && !contributor.bussy;
+                return (
+                  s.name === skill.name &&
+                  s.level >= skill.level &&
+                  !contributor.bussy &&
+                  !skill.fullfiled
+                );
               })
             ) {
               possibleExecutedProject.name = project.name;
+              skill.fullfiled = true;
               possibleExecutedProject.contributors.push(contributor);
+              contributor.bussy = true;
               if (project.numberOfSkills === possibleExecutedProject.contributors.length) {
                 submission.projects.push(possibleExecutedProject);
-                possibleExecutedProject.contributors.forEach((c) => {
-                  if (dataset.contributors.find((contributor) => contributor.name === c.name)) {
-                    c.bussy = true;
-                  }
-                });
+                // possibleExecutedProject.contributors.forEach((c) => {
+                //    if (dataset.contributors.find((contributor) => contributor.name === c.name)) {
+                //      c.bussy = true;
+                //   }
+                // });
               }
             }
           });
