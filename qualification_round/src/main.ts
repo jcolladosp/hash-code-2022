@@ -16,9 +16,14 @@ const datasets = {
 
 const datasetArg = process.argv[2];
 
+const timelineDays = 99999999;
+
 readDataset(path.resolve(process.cwd(), `${datasetsPath}${datasets[datasetArg]}`)).then(
   (dataset: Dataset) => {
-    console.log(dataset);
+    for (let i = 0; i < timelineDays; i++) {
+      dataset.projects.forEach((project) => {});
+    }
+
     // Escribimos output en fichero
     // writeSubmission(path.resolve(process.cwd(), outputFilesPath), submission);
   },

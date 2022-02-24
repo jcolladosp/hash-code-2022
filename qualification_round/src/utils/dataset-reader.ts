@@ -1,7 +1,9 @@
-﻿import * as readline from 'readline';
-import { Dataset, Ingredient } from '../../models/models';
+﻿import { once } from 'events';
 import * as fs from 'fs';
-import { once } from 'events';
+import * as readline from 'readline';
+import { Dataset } from '../../models/models';
+
+export let maximumBestScore = 0;
 
 export function readDataset(inputFilePath: string): Promise<Dataset> {
   const dataset: Dataset = {
@@ -70,6 +72,14 @@ export function readDataset(inputFilePath: string): Promise<Dataset> {
     } else {
       if (isProjectLine) {
         const [projectName, daysToComplete, score, bestBefore, numberOfSkills] = line.split(' ');
+        const scorePerDay = parseInt(score, 10) / parseInt(daysToComplete, 10);
+        const scorePerPerson = parseInt(score, 10) / parseInt(numberOfSkills, 10);
+        const scorePorDayPerPerson = scorePerDay / parseInt(numberOfSkills, 10);
+
+        if (parseInt(bestBefore, 10) > maximumBestScore) {
+          maximumBestScore = parseInt(bestBefore, 10);
+        }
+
         dataset.projects.push({
           name: projectName,
           bestBefore: parseInt(bestBefore, 10),
@@ -77,6 +87,9 @@ export function readDataset(inputFilePath: string): Promise<Dataset> {
           numberOfSkills: parseInt(numberOfSkills, 10),
           requiredSkills: [],
           score: parseInt(score, 10),
+          dayScore: scorePerDay,
+          personScore: scorePerPerson,
+          personDayScore: scorePorDayPerPerson,
         });
         pendingProjectSkills = parseInt(numberOfSkills, 10);
         isSkillProjectLine = true;
@@ -102,9 +115,3 @@ export function readDataset(inputFilePath: string): Promise<Dataset> {
 
   return once(rl, 'close').then(() => dataset);
 }
-
-const parseIngredientsLint = (line: string): Ingredient[] =>
-  line
-    .split(' ')
-    .slice(1)
-    .map((ingredient) => ({ name: ingredient }));

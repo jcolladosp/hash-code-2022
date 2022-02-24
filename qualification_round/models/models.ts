@@ -17,6 +17,10 @@ export interface Project {
   bestBefore: number;
   numberOfSkills: number;
   requiredSkills: Skill[];
+  dayScore?: number;
+  personScore?: number;
+  personDayScore?: number;
+  bestBeforeScore?: number;
 }
 
 export interface Dataset {
@@ -25,4 +29,13 @@ export interface Dataset {
   totalProjects: number;
   contributors: Contributor[];
   projects: Project[];
+}
+export interface ExecutedProject {
+  name: string;
+  contributors: string[];
+}
+
+export interface Submission {
+  projects_executed: number;
+  projects: ExecutedProject;
 }
