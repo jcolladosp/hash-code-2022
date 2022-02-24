@@ -5,7 +5,7 @@ import { once } from 'events';
 
 export function readDataset(inputFilePath: string): Promise<Dataset> {
   const dataset: Dataset = {
-    name: inputFilePath.split('/').pop() || '',
+    name: inputFilePath.split('/').pop().split('.')[0] || '',
     totalClients: 0,
     clients: [],
   };
@@ -31,8 +31,6 @@ export function readDataset(inputFilePath: string): Promise<Dataset> {
   });
 
   return once(rl, 'close').then(() => dataset);
-
-  //return parseDataset(name, fileContent);
 }
 
 const parseIngredientsLint = (line: string): Ingredient[] =>
@@ -40,13 +38,3 @@ const parseIngredientsLint = (line: string): Ingredient[] =>
     .split(' ')
     .slice(1)
     .map((ingredient) => ({ name: ingredient }));
-
-// export function parseDataset(name: string, fileContent: string): Dataset {
-//   const [teamsLine, ...pizzaLines] = trimLines(fileContent.split('\n'));
-//   ingredientMap.clear();
-//   return {
-//     name,
-//     teams: parseTeams(teamsLine),
-//     pizzas: pizzaLines.map(parsePizza),
-//   };
-//}

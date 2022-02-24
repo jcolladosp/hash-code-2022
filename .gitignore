@@ -12,3 +12,4 @@ coverage
 .github
 
 /temp
+*/output
